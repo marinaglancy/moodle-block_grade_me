@@ -161,27 +161,6 @@
             <value>1</value>
         </row>
     </table>
-    <table name="assignment">
-        <column>id</column>
-        <column>course</column>
-        <column>name</column>
-        <column>intro</column>
-        <column>grade</column>
-        <row>
-            <value>6</value>
-            <value>0</value>
-            <value>testassignment6</value>
-            <value>test</value>
-            <value>25</value>
-        </row>
-        <row>
-            <value>7</value>
-            <value>0</value>
-            <value>testassignment7</value>
-            <value>test</value>
-            <value>85</value>
-        </row>
-    </table>
     <table name="assignment_submissions">
         <column>id</column>
         <column>assignment</column>

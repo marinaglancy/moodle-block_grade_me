@@ -51,13 +51,16 @@ Feature: Reset task works.
         And I follow "My courses"
         And I follow "Course 2"
         And I turn editing mode on
-        And I add a "Assignment" to section "1" and I fill the form with:
-          | Assignment name | Assign |
-          | Description | Submit your online text |
-          | assignsubmission_onlinetext_enabled | 1 |
-          | assignsubmission_onlinetext_wordlimit_enabled | 1 |
-          | assignsubmission_onlinetext_wordlimit | 10 |
-          | assignsubmission_file_enabled | 0 |
+      And the following "activity" exists:
+        | activity                                      | assign                  |
+        | course                                        | C1                      |
+        | section                                       | 1                       |
+        | name                                          | Assign                  |
+        | description                                   | Submit your online text |
+        | assignsubmission_onlinetext_enabled           | 1                       |
+        | assignsubmission_onlinetext_wordlimit_enabled | 1                       |
+        | assignsubmission_onlinetext_wordlimit         | 10                      |
+        | assignsubmission_file_enabled                 | 0                       |
         And I log out
         # Submit the quiz as the first user.
         And I log in as "student1"

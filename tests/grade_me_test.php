@@ -30,7 +30,6 @@ require_once($CFG->dirroot . '/blocks/moodleblock.class.php');
 require_once($CFG->dirroot . '/blocks/grade_me/lib.php');
 require_once($CFG->dirroot . '/blocks/grade_me/block_grade_me.php');
 require_once($CFG->dirroot . '/blocks/grade_me/plugins/assign/assign_plugin.php');
-require_once($CFG->dirroot . '/blocks/grade_me/plugins/assignment/assignment_plugin.php');
 require_once($CFG->dirroot . '/blocks/grade_me/plugins/data/data_plugin.php');
 require_once($CFG->dirroot . '/blocks/grade_me/plugins/forum/forum_plugin.php');
 require_once($CFG->dirroot . '/blocks/grade_me/plugins/glossary/glossary_plugin.php');
@@ -63,7 +62,7 @@ class grade_me_test extends advanced_testcase {
         $plugins = array();
         $excludes = array();
 
-        $gradeables = array('assign', 'assignment', 'forum', 'glossary', 'quiz');
+        $gradeables = array('assign', 'forum', 'glossary', 'quiz');
         foreach ($gradeables as $gradeable) {
             if (in_array($gradeable, $names)) {
                 $pgen = $generator->get_plugin_generator("mod_{$gradeable}");
@@ -96,7 +95,7 @@ class grade_me_test extends advanced_testcase {
                 'values' => 'courses',
                 'param'  => 'id',
                 'tables' => array(
-                        'assign', 'assignment', 'course_modules', 'forum', 'forum_discussions',
+                        'assign', 'course_modules', 'forum', 'forum_discussions',
                         'glossary', 'quiz',
                 ),
             ),
@@ -725,24 +724,6 @@ class grade_me_test extends advanced_testcase {
     }
 
     /**
-     * Test the block_grade_me_query_assignment function
-     */
-    public function test_query_assignment() {
-        $expected = ", asgn_sub.id submissionid, asgn_sub.userid, asgn_sub.timemodified timesubmitted
-        FROM {assignment_submissions} asgn_sub
-        JOIN {assignment} a ON a.id = asgn_sub.assignment
-   LEFT JOIN {block_grade_me} bgm ON bgm.courseid = a.course AND bgm.iteminstance = a.id
-       WHERE asgn_sub.userid IN (?,?)
-             AND a.grade > 0
-             AND asgn_sub.timemarked < asgn_sub.timemodified";
-
-        list($sql, $params) = block_grade_me_query_assignment(array(2, 3));
-        $this->assertEquals($expected, $sql);
-        $this->assertEquals(array(2, 3), $params);
-        $this->assertFalse(block_grade_me_query_assignment(array()));
-    }
-
-    /**
      * Provide input data to the parameters of the test_block_grade_me_get_content_single_user() method.
      *
      * Test data is composed of:
@@ -766,17 +747,6 @@ class grade_me_test extends advanced_testcase {
             6 => '/testassignment4/',
         );
         $data['assign'] = array($plugin, $matches);
-
-        // Legacy assignment test.
-        $plugin = 'assignment';
-        $matches = array(
-            1 => '/Go to assignment/',
-            2 => '|mod/assignment/submissions.php|',
-            3 => '/userid=[user0]&amp;mode=single/',
-            5 => '/testassignment5/',
-            6 => '/testassignment6/',
-        );
-        $data['assignment'] = array($plugin, $matches);
 
         return $data;
     }
@@ -865,18 +835,6 @@ class grade_me_test extends advanced_testcase {
             6 => '/testassignment4/'
         );
         $data['assign'] = array($plugin, $matches);
-
-        // Legacy assignment test.
-        $plugin = 'assignment';
-        $matches = array(
-            1 => '/Go to assignment/',
-            2 => '|mod/assignment/submissions.php|',
-            3 => '/userid=[user0]&amp;mode=single/',
-            4 => '/userid=[user1]&amp;mode=single/',
-            5 => '/testassignment5/',
-            6 => '/testassignment6/',
-        );
-        $data['assignment'] = array($plugin, $matches);
 
         // Quiz test.
         $plugin = 'quiz';
