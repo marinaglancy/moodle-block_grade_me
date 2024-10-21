@@ -53,7 +53,7 @@ Feature: Reset task works.
         And I turn editing mode on
       And the following "activity" exists:
         | activity                                      | assign                  |
-        | course                                        | C1                      |
+        | course                                        | C2                      |
         | section                                       | 1                       |
         | name                                          | Assign                  |
         | description                                   | Submit your online text |
@@ -83,6 +83,8 @@ Feature: Reset task works.
         And I set the following fields to these values:
           | Online text | 7 8 9 10. |
         And I press "Save changes"
+        And I press "Submit assignment"
+        And I press "Continue"
         Then I should see "Submitted for grading"
         And I log out
         #Validate both the quiz and assignment show up
