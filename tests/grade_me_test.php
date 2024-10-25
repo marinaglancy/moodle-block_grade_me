@@ -41,7 +41,7 @@ require_once($CFG->dirroot . '/blocks/grade_me/plugins/turnitintooltwo/turnitint
  * Unit tests for block_grade_me.
  * @group block_grade_me
  */
-class block_grade_me_testcase extends advanced_testcase {
+class grade_me_test extends advanced_testcase {
 
     /**
      * Load the testing dataset. Meant to be used by any tests that require the testing dataset.
@@ -761,7 +761,7 @@ class block_grade_me_testcase extends advanced_testcase {
         $matches = array(
             1 => '/Go to assign/',
             2 => '|mod/assign/view.php|',
-            3 => '/action=grader&userid=[user0]/',
+            3 => '/action=grade&userid=[user0]/',
             5 => '/testassignment3/',
             6 => '/testassignment4/',
         );
@@ -859,8 +859,8 @@ class block_grade_me_testcase extends advanced_testcase {
         $matches = array(
             1 => '/Go to assign/',
             2 => '|mod/assign/view.php|',
-            3 => '/action=grader&userid=[user0]/',
-            4 => '/action=grader&userid=[user1]/',
+            3 => '/action=grade&userid=[user0]/',
+            4 => '/action=grade&userid=[user1]/',
             5 => '/testassignment3/',
             6 => '/testassignment4/'
         );
