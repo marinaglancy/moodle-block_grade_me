@@ -32,7 +32,7 @@ class cache_grade_data extends \core\task\scheduled_task {
 
     public function execute() {
         global $CFG;
-        require_once($CFG->dirroot . '/blocks/grade_me/lib.php');
+        \core_component::require_plugin_file('/blocks/grade_me/lib.php');
         block_grade_me_cache_grade_data();
     }
 }

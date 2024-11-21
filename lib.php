@@ -69,7 +69,7 @@ function block_grade_me_enabled_plugins() {
     $enabledplugins = array();
     $plugins = get_list_of_plugins('blocks/grade_me/plugins');
     foreach ($plugins as $plugin) {
-        $pluginfile = $CFG->dirroot . '/blocks/grade_me/plugins/' . $plugin . '/' . $plugin . '_plugin.php';
+        $pluginfile = core_component::resolve_plugin_file_path('/blocks/grade_me/plugins/' . $plugin . '/' . $plugin . '_plugin.php');
         if (file_exists($pluginfile)) {
             $enablekey = 'block_grade_me_enable' . $plugin;
             if (isset($CFG->$enablekey) && $CFG->$enablekey == true) {

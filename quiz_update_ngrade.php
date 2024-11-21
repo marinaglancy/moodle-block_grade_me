@@ -23,7 +23,7 @@
  * @copyright  (C) 2016 Remote Learner.net Inc http://www.remote-learner.net
  */
 
-require_once(__DIR__ . '/../../config.php');
+defined('MOODLE_INTERNAL') || require_once(__DIR__ . '/../../config.php');
 
 $PAGE->set_url(new moodle_url($CFG->wwwroot . '/blocks/grade_me/quiz_update_ngrade.php'));
 $PAGE->set_pagelayout('admin');

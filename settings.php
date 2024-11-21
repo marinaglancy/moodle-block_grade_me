@@ -32,8 +32,7 @@ if ($ADMIN->fulltree) {
 
     $plugins = get_list_of_plugins('blocks/grade_me/plugins');
     foreach ($plugins as $plugin) {
-        if (file_exists($CFG->dirroot . '/blocks/grade_me/plugins/' . $plugin . '/' . $plugin . '_plugin.php')) {
-            include_once($CFG->dirroot . '/blocks/grade_me/plugins/' . $plugin . '/' . $plugin . '_plugin.php');
+        if (core_component::require_plugin_file('/blocks/grade_me/plugins/' . $plugin . '/' . $plugin . '_plugin.php')) {
             if (function_exists('block_grade_me_required_capability_' . $plugin)) {
                 $requiredcapability = 'block_grade_me_required_capability_' . $plugin;
                 $a = $requiredcapability();
